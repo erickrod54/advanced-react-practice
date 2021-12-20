@@ -18,6 +18,12 @@ const UseStateArray = () => {
       
         setPeople(newPeople)
   }
+ /**pending feature */
+  const AddItem = () => {
+    const morePeople = 
+        people.push({id:'10', name:'Testname'})
+    console.log(morePeople)
+  }
 
 
   return (
@@ -56,6 +62,11 @@ const UseStateArray = () => {
           <button 
               className='btn' 
               onClick={() => setPeople(data)}> Restore Data
+          </button>
+
+          <button 
+              className='btn' 
+              onClick={() => AddItem()}> Add Item -Pending feature-
           </button>
     </>
         );
