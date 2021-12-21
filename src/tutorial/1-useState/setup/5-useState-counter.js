@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-/**useState version 1, is a counter that uses inline
- * function to decrease and increase and a reference 
- * handler to reset to the initial value
+/**useState-counter version 2, is a counter 
+ * that uses inline function to decrease and 
+ * increase and a reference  handler to reset 
+ * to the initial value (first version ) and 
+ * a second counter that use functional
+  * aproach inside the setTimeout() method to update 
+  * the count
  */
 const UseStateCounter = () => {
-  /**to set up the counter, i set an 'initialValue',
-   * variable, this can be whatever value i need
-   */
+  
   const initialValue = 0;
 
   /**destructure my counter in a 'value' and 
@@ -21,6 +23,15 @@ const UseStateCounter = () => {
     setValue(initialValue)
   }
   console.log('initial value:', initialValue)
+
+  /**this handler increase the value 2 seonds 
+   * later -asynchronous- 
+  */
+  const complexIncrease = () => {
+    setTimeout(() =>{
+      setValue(value + 1)
+    }, 2000);
+  };
   
   return (
     <>  
@@ -28,10 +39,7 @@ const UseStateCounter = () => {
       <section style={{margin:'4rem 0'}}>
         <h2>regular counter</h2>
           <h2>{value}</h2>
-          {/**Increase and Decrease button can be
-           * done also as reference handler, in this
-           * case i done with inline function
-           */}
+          {/***/}
             <button 
                 className='btn' 
                 onClick={()=>
@@ -48,6 +56,12 @@ const UseStateCounter = () => {
                 onClick={()=>
                 resetValue()}>
                   Reset</button>
+              <h2>More Complex Counter</h2>
+              <h1>{value}</h1>
+              <button 
+                className='btn' 
+                onClick={complexIncrease}>
+                  Increase</button>
       </section>
     </>  
       );
