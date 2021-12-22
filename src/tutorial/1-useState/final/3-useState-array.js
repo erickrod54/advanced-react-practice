@@ -3,9 +3,16 @@ import { data } from '../../../data';
 const UseStateArray = () => {
   const [people, setPeople] = React.useState(data);
 
+  /**useState version 2 - i update 'newPeople' data
+   * array using a previous state, i'll call it
+   * 'oldPeople'
+  */
   const removeItem = (id) => {
-    let newPeople = people.filter((person) => person.id !== id);
-    setPeople(newPeople);
+    setPeople((oldPeople) => {
+    const newPeople = oldPeople.filter((person) => person.id !== id);
+    return newPeople;
+
+    });
   };
   return (
     <>
