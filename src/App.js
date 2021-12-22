@@ -1,5 +1,5 @@
 import React from 'react';
-import Setup from './tutorial/1-useState/setup/5-useState-counter'
+import Final from './tutorial/1-useState/final/3-useState-array'
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
     <h2>Advanced React Concepts</h2>
     <div className='container'>
-      <Setup />
+      <Final />
   
     </div>
     </>
