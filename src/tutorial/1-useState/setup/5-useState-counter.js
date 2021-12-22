@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-/**useState-counter version 2, is a counter 
+/**useState-counter version 3, is a counter 
  * that uses inline function to decrease and 
  * increase and a reference  handler to reset 
  * to the initial value (first version ) and 
  * a second counter that use functional
-  * aproach inside the setTimeout() method to update 
-  * the count
+  * aproach inside the setValue() that use
+  * the previous state to increment
  */
 const UseStateCounter = () => {
   
@@ -24,13 +24,18 @@ const UseStateCounter = () => {
   }
   console.log('initial value:', initialValue)
 
-  /**this handler increase the value 2 seonds 
-   * later -asynchronous- 
+  /**this handler use the previous state
+   * of the value to increment the value
+   * with delay of 2 seg, i use 'setTimeout'
+   * 'asynchronous', in this case prevState is
+   * the current value, and i get the next value
   */
   const complexIncrease = () => {
-    setTimeout(() =>{
-      setValue(value + 1)
-    }, 2000);
+    setTimeout(() => {
+      setValue((prevState)=>{
+      return prevState + 1; 
+    })
+  }, 2000);
   };
   
   return (
