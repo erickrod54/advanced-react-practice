@@ -14,7 +14,7 @@ import React, { useState, useEffect } from 'react';
 // cleanup function
 // second parameter
 
-/** useEffect version 2 'conditional useEffect' */
+/** useEffect version 3 'Second parameter' */
 const UseEffectBasics = () => {
 
   /**i use the 'useState' value to manage the counter
@@ -25,17 +25,34 @@ const UseEffectBasics = () => {
   useEffect(() => {
     console.log('call useEffect');
     /**the conditional goes inside useEffect*/
-    if (value > 1) {
+    if (value >= 1) {
       document.title = `New Messages (${value})` 
     }
-  });
+    /** the 'Second parameter' goes here*/
+  }, [value]);
+
+  /**if i leave it empty '[]' useEffect only renders 
+   * once, but if i fill it, for example '[value]'
+   * everything inside of a 'Second parameter' is
+   * a dependency, and useEffect will trigger every
+   * time the dependency 'value changes'*/
+
+  /**---I can add as many 'useEffect' as i want--- */
+
+/**this 'Second parameter' dependencies are empty
+ *so only renders once 
+*/
+useEffect(() => {
+  console.log('hello world')
+}, []);
+
   console.log('render component, renders twice cause react strict mode')
   return (
     <>  
       <h2>useEffect Basics</h2>
       <h1>{value}</h1>
       <button className='btn' 
-              onClick={()=> setValue(value +1 )}
+              onClick={()=> setValue(value + 1 )}
               >Click Me</button>
     </>
     );
