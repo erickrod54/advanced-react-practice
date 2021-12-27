@@ -14,28 +14,26 @@ import React, { useState, useEffect } from 'react';
 // cleanup function
 // second parameter
 
-/** this example is about 'changing document title' */
+/** useEffect version 2 'conditional useEffect' */
 const UseEffectBasics = () => {
 
   /**i use the 'useState' value to manage the counter
    * state
    */
   const [value, setValue] = useState(0)
+
   useEffect(() => {
     console.log('call useEffect');
-    /** Second - as i clicked already the side-effect
-     * of 'New Message' as the title changes for the
-     * counter value
-    */
-    document.title = `New Messages (${value})`
+    /**the conditional goes inside useEffect*/
+    if (value > 1) {
+      document.title = `New Messages (${value})` 
+    }
   });
   console.log('render component, renders twice cause react strict mode')
   return (
     <>  
       <h2>useEffect Basics</h2>
       <h1>{value}</h1>
-      {/**First - when i click the component 
-       * renders */}
       <button className='btn' 
               onClick={()=> setValue(value +1 )}
               >Click Me</button>
