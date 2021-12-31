@@ -1,48 +1,22 @@
 import React, { useState } from 'react';
 
 /**---short circuit evaluation and ternary 
- *      operator version 1-- this version is
+ *      operator version 3-- this version is
  *      about short-circuit evaluation over 
- *      expresions
+ *      expresions using 'ternary operator'
  */
 
-// short-circuit evaluation
-
-/**short-circuit evaluation is a way to
- * evaluate expresions using operators
- */
 // ternary operator
 
 const ShortCircuit = () => {
 
-  /**i build the state setting up in empty string
-   * and it will be use to evaluate*/
-  
-  /**i can test changing empty string for a value
-   * and will short circuit the value from one
-   * expression to another
-   */
   const [ text, setText ] = useState('')
-  
-  /**evaluation over 2 values */
-
-  /**--the evaluation is from left to right, and
-   * keep the value from right
+  /**i can check the changing value javaConsole
+   * >Components, ShortCircuit
    */
+  const [isError, setIsError] = useState(false);
 
-  /**--if the text state is 'true' or 'hello wolrd'--*/
-  /**if the text value is 'true' and 'hello world',
-   * i'm evaluating a expresion where both values are
-   * true so the result will be 'hello wolrd'
-   */
   const firstValue = text || 'hello world';
-  
-  /**--if the text state is 'true' and 'hello wolrd'--*/
-  /**the result of this expresion having an 'empty'
-   * string that represent 'false' and 'hello 
-   * world' that represents true will result in 
-   * empty string as 'value'
-   */
   const secondValue = text && 'hello world';
 
   return (
@@ -51,7 +25,30 @@ const ShortCircuit = () => {
 
       <h2>{firstValue}</h2>
       <h2>value: {secondValue}</h2>
+      {/**this button will change the state of the
+       * error from 'isError' -true- to '!isError'
+       * -false-
+      */}
+        <button 
+            className='btn' 
+            onClick={() => setIsError(!isError)}
+            >Toogle error</button>
+      {isError && <h1>Error...</h1>}
       
+      {/**the ternary operator evaluate over a true
+       * - false expresion, then depending on the value
+       * will display 'first JSX' - 'p' tag- or 
+       * 'second JSX' - 'div' tag -
+       */}
+      {isError ? (
+          <p>There is an error...</p>
+        ) : (
+          <div>
+            <h2>there is no error</h2>
+          </div>
+          )} 
+      
+
       {/**i can evaluate directly in the JSX */}
       {/**<h2>{text || 'jhon Doe'}</h2> */}
 
