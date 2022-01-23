@@ -1,36 +1,56 @@
 import React, { useState } from 'react';
 // JS
-// const input = document.getElementById('myText');
 // React
 
 /**-------covered in this version------------ */
 
-/** Forms Basics version 2 - feautures: 
+/** Forms Basics version 3 - feautures: 
  * 
- * --------->Build states for inputs.
- * --------->controlled input behavior( 
- *              -> to make it behave to take
- *                 whatever target values that i 
- *                 give to them:
- *        
- *        const inputValue = input.value
- *        value, onChange
- *  
- *              ->to place it whereever i need it )*/
+ * --------->Add people to a list:
+ *        -->Build a state for people
+ *        -->Add dynamicly people( after cheking for
+ *          every person is fullfiled i'll add into 
+ *          the empty people array, then i'll map the
+ *          people array and destructure the data that 
+ *         i need: id, firstName, email)
+ *                     
+ *   ---- pending 'removeItem' feature --------
+ * 
+ * */
 
 const ControlledInputs = () => {
 
-  /**These are the states for the inputs
-   * --intially empty because i gonna fill it
-   * --with the values that i enter in the inputs*/
  const [ firstName, setFirstName ] = useState('');
  const [ email, setEmail ] = useState('');
+ /**Here i build the state to keep all the persons
+  * added*/
+ const [people, setPeople] = useState([]);
 
- /**the 'e' -this parameter can be whatever i want-
-  * will prompted the values after they get entered*/
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName, email)
+    /**check for fullfilled fields */
+    if (firstName && email) {
+    /**i destructure the single item in his
+     * values -creating an id converting
+     *  date to string-*/  
+    const person = { 
+      id: new Date().getTime().toString(),
+       firstName, email}
+
+ console.log(person)
+ /**i use the 'setPeople' state to add the person into
+  * the empty 'people' array*/
+ setPeople((people) => {
+   return [...people, person]
+ })
+ /**then i set back the inputs to empty strings 
+  * again */
+ setFirstName('');
+ setEmail('');
+ console.log(people)
+    }else{
+      console.log('empty values')
+    }
   }
 
   return (
@@ -77,6 +97,25 @@ const ControlledInputs = () => {
         </div>
         <button type='submit'>add person</button>
       </form>
+      {/**then i add dynamicly the person to the
+       * people array and show in them*/}
+      {
+        /**i map the people array first */
+        people.map((person) => {
+          /**i ask for every person id,firstName,
+           * email*/
+          const {id, firstName, email} = person
+          return(
+            /**then i return the 'JSX' with the unique
+             * 'id, firstName and email'*/
+            <div className='item' key={id}>
+              <h4>{firstName}</h4>
+              <p>{email}</p>
+            </div>
+          
+          )
+        })
+      }
     </arcticle>
   
   </>
