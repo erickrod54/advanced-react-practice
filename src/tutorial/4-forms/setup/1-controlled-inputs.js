@@ -1,58 +1,42 @@
 import React, { useState } from 'react';
 // JS
 // const input = document.getElementById('myText');
-// const inputValue = input.value
 // React
-// value, onChange
 
 /**-------covered in this version------------ */
 
-/** Forms Basics version 1 - feautures: 
- * --------->Build a Basic Form to control their 
- *          inputs.
+/** Forms Basics version 2 - feautures: 
+ * 
+ * --------->Build states for inputs.
  * --------->controlled input behavior( 
- *              -> to make it behave by the 
- *                requirement that i need. 
- *              ->to place it whereever i need it,
- * )*/
+ *              -> to make it behave to take
+ *                 whatever target values that i 
+ *                 give to them:
+ *        
+ *        const inputValue = input.value
+ *        value, onChange
+ *  
+ *              ->to place it whereever i need it )*/
 
 const ControlledInputs = () => {
 
-  /**with this reference function trigger a loopback
-   * test to return the behavior that i want from the 
-   * form -> onSubmit={handleSubmit} 
-   * 
-   *  Note: the parameter 'e' is used to target the 
-   *  inputs
-   * 
-   * */
+  /**These are the states for the inputs
+   * --intially empty because i gonna fill it
+   * --with the values that i enter in the inputs*/
+ const [ firstName, setFirstName ] = useState('');
+ const [ email, setEmail ] = useState('');
 
+ /**the 'e' -this parameter can be whatever i want-
+  * will prompted the values after they get entered*/
   const handleSubmit = (e) => {
-    /**this line is very important prevents the 
-     * default behavior to handle forms, and let
-     * me take control of the forms*/
     e.preventDefault();
-    /**doing the previous line, hello world will
-     * be prompted doing the 'behavior' test 
-     * sucessful*/
-    console.log('hello world')
+    console.log(firstName, email)
   }
 
   return (
   <>
     <h2>controlled inputs</h2>
     <arcticle>
-      {/** styles applied:
-       *          form--> the form container-where 
-       *                  the inputs are-
-       *  form-control--> style for the input itself
-      */}
-
-      {/**i can control where to place and trigger the
-       * action: 
-       *        --->from the form with onSubmit
-       *        --->from the button with onClick
-       * */}
       <form className='form' onSubmit={handleSubmit}>
         {/**first input for the name */}
         <div className='form-control'>
@@ -60,7 +44,19 @@ const ControlledInputs = () => {
           <input 
             type='text' 
             id='firstName' 
-            name='firstName'/>
+            name='firstName'
+            /**i add the initial values of the state '' */
+            value={firstName}
+            /** 'onChange' i trigger the setFirstName 
+             * to get the values entered by the user:
+             * 
+             *  thats what 'e.target.value' does
+             * 
+             * i can check the state change in 
+             * javaConsole > Components
+            */
+            onChange={(e)=>setFirstName(e.target.value)}
+            placeholder='Your Name'/>
         </div>
         {/** second input for the email*/}
         <div className='form-control'>
@@ -68,7 +64,16 @@ const ControlledInputs = () => {
           <input 
             type='text' 
             id='email' 
-            name='email' />
+            name='email' 
+            /**i add the initial values of the state '' */
+            value={email}
+            /** 'onChange' i trigger the setEmail 
+             * to get the values entered by the user
+             * i can check the state change in 
+             * javaConsole > Components
+             */
+            onChange={(e)=>setEmail(e.target.value)}
+            placeholder='Your Email'/>
         </div>
         <button type='submit'>add person</button>
       </form>
