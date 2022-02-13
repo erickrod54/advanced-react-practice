@@ -3,28 +3,51 @@ import Modal from './Modal';
 import { data } from '../../../data';
 // reducer function
 
-/**Modal App version 1 - Features:
+/**Modal App version 2 - Features:
  * 
- *      ---->Building states (for single name, 
- *           for people -an array of names-, and
- *           showModal- a flag for showing or not 
- *           the modal)
- *      ---->Building a Basic Form -with handleSubmit-
- *      ---->Building 'handleSubmit' method 
- *      ---> Styling the app
+ *      ---->Refactoring states for 'showModal' and 
+ *           'people' with reducers.
  * 
- * Note: 'index' name is a default page to be 
- * displayed as default- check App js file comment-
+ *      Note: this states will be reduced to a
+ *            default 'state' value
+ * 
+ *      ---->Drilling the 'modalContent' prop
+ *          to Modal component 
  */
+
+/**this is the reducer for the states,
+ * always has a 'state' and a 'action'*/
+const reducer = (state, action) => {
+  /**this will prompt a test for the action */
+  console.log(state, action);
+  return state;
+};
+/**Note: a reducer always has to return something
+ * for this 'test', i'll return the state*/
+
+/**this default state must be value of the reducer 
+ * state*/
+const defaultState = {
+  /**if i want to test the content i can pass
+   * a value for 'modalContent'
+   */
+  people: [],
+  isModalOpen:false,
+  modalContent: '',
+};
+/**in this version 'showModal' is replaced by
+ * 'isModalOpen' and switch beetwen 'true' and 
+ * 'false'*/
 
 const Index = () => {
 
   /**the state for name  */
   const [name, setName] = useState('');
-  /**the state for data using the data array */
-  const [people, setPeople] = useState(data);
-  /**the modal set as 'false' as default */
-  const [showModal, setShowModal] = useState(false)
+  
+  /**this is the reducer state */
+  const [state, dispatch ] = useReducer(reducer, defaultState)
+  /**dispatch must be a value of reducer state
+   * and indicates a type of action*/
 
   /**i catch the 'event' e from onChance 'prop' from 
    * the input*/
@@ -32,25 +55,22 @@ const Index = () => {
     e.preventDefault()
     /**if 'name' exist */
     if (name) {
-      /**the modal get triggered */
-      setShowModal(true)
-      /**i add the name to the 'data' array */
-      setPeople([...people,
-        {id: new Date().getTime().toString(), name }])
-      setName('')
+        /**this message will be propmted
+         * and is related to reducer function*/
+        dispatch({type:'Testing'})
     }else{
-      setShowModal(true)
+   
     }
   }
 
   return (
   <>
     <h2>useReducer</h2>
-    {/**if 'showModal' exist show the 'Modal' 
-     * Component*/}
-    {showModal && <Modal />}
-    {/**the form with the 'handleSubmit' and the
-     * 'form' style*/}
+    {/**if 'state.isModalOpen' and show Modal 
+     * Component with modalContent prop drilled 
+     * to the component*/}
+    {state.isModalOpen && <Modal modalContent={state.modalContent}/>}
+    {/**Note: to test switch the values of 'defaultState'*/}
     <form onSubmit={handleSubmit} className='form'> 
       <div>
         {/**the input with name value and targeting
@@ -66,7 +86,7 @@ const Index = () => {
     </form>
     {/**Maping the people array to show every old
      * and new name*/}
-    {people.map((person) => {
+    {state.people.map((person) => {
       return(
         /**by 'id' show every 'name' */
         <div key={person.id}>
