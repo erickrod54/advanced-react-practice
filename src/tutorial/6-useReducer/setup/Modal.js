@@ -1,7 +1,21 @@
 import React, { useEffect } from 'react';
 
-const Modal = () => {
-  return <div>i'm modal</div>;
+/**Modal app version 2 - Modal Component - Features:
+ * 
+ *      -->drilling 'modalContent' from:
+ *                  index.js --> Modal.js
+ *         and render it
+ *      
+ */
+const Modal = ({modalContent}) => {
+  return (
+  <>
+    <div className='modal'>
+      <p>{modalContent}</p>
+    </div>
+  
+  </>
+  );
 };
 
 export default Modal;
