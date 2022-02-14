@@ -3,48 +3,47 @@ import Modal from './Modal';
 import { data } from '../../../data';
 // reducer function
 
-/**Modal App version 4 - Features:
+/**Modal App version 5 - Features:
  * 
  *      ---->Building 'CLOSE_MODAL' 
  *          feature 
- * 
- *  Note: still working on 'REMOVE_ITEM', i have to check it
- *        and fix it
+ *     
+ *     ---->Build 'REMOVE_ITEM' Feature
+ *  
+ *  Note: the issue with 'REMOVE_ITEM' on
+ *  version 4 was the condition of 'CLOSE_MODAL'
+ *  was asigning instead of comparing -the modal
+ *  was blocking the remove feature-
  * 
  */
 
 /**this is the reducer for the states,
  * always has a 'state' and a 'action'*/
 
-const reducer = (state, action) => {
-  console.log(state)
+ const reducer = (state, action) => {
+
   if (action.type === 'ADD_ITEM') {
-    /**here i add the whole list of items to 'people' array
-     * -remember 'defaultState'  and the 'action.payload' */
      const newPeople = [...state.people, action.payload]
      return {...state, 
               people: newPeople,
               isModalOpen: true,  
               modalContent: 'Item Added'};
             }
-            /**here i define the 'action.type' for 'NO_VALUE'
-             * -there is no payload for this action.type, 
-             * because is crated only to show the message-*/
-            if (action.type === 'NO_VALUE') {
-              /**here the state will be empty thats why is
-               * checked as 'NO_VALUE' action.type*/
-              return{ ...state, 
-                   isModalOpen:true,
-                   modalContent: 'please enter a value'}
+  if (action.type === 'NO_VALUE') {
+      return{ ...state, 
+           isModalOpen:true,
+           modalContent: 'please enter a value'}
   }
-  if (action.type = 'CLOSE_MODAL') {
+  /**this line was action.type = 'CLOSE_MODAL' instead of
+   * action.type === 'CLOSE_MODAL'*/
+  if (action.type === 'CLOSE_MODAL') {
     return{ ...state, 
       isModalOpen:false
     }
   }
   if (action.type === 'REMOVE_ITEM') {
-    const newPeople = state.people.filter((person) => 
-      person.id !== action.payload
+    const newPeople = state.people.filter(
+        (person) =>  person.id !== action.payload
     )
     return { ...state, people: newPeople}
   }
@@ -106,7 +105,9 @@ const Index = () => {
     {/**if 'state.isModalOpen' and show Modal 
      * Component with modalContent prop drilled 
      * to the component*/}
-    {state.isModalOpen && <Modal closeModal={closeModal} modalContent={state.modalContent}/>}
+    {state.isModalOpen && <Modal 
+                              closeModal={closeModal} 
+                              modalContent={state.modalContent}/>}
     {/**Note: to test switch the values of 'defaultState'*/}
     <form onSubmit={handleSubmit} className='form'> 
       <div>
