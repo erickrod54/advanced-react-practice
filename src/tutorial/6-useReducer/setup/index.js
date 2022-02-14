@@ -3,34 +3,42 @@ import Modal from './Modal';
 import { data } from '../../../data';
 // reducer function
 
-/**Modal App version 2 - Features:
+/**Modal App version 3 - Features:
  * 
- *      ---->Refactoring states for 'showModal' and 
- *           'people' with reducers.
- * 
- *      Note: this states will be reduced to a
- *            default 'state' value
- * 
- *      ---->Drilling the 'modalContent' prop
- *          to Modal component 
+ *      ---->Building 'ADD_ITEM' and 'NO_VALUE' and adding
+ *           them to the reducer 
  */
 
 /**this is the reducer for the states,
  * always has a 'state' and a 'action'*/
-const reducer = (state, action) => {
-  /**this will prompt a test for the action */
-  console.log(state, action);
-  return state;
-};
-/**Note: a reducer always has to return something
- * for this 'test', i'll return the state*/
 
-/**this default state must be value of the reducer 
- * state*/
+const reducer = (state, action) => {
+  console.log(state)
+  if (action.type === 'ADD_ITEM') {
+    /**here i add the whole list of items to 'people' array
+     * -remember 'defaultState'  and the 'action.payload' */
+     const newPeople = [...state.people, action.payload]
+     return {...state, 
+              people: newPeople,
+              isModalOpen: true,  
+              modalContent: 'Item Added'};
+            }
+            /**here i define the 'action.type' for 'NO_VALUE'
+             * -there is no payload for this action.type, 
+             * because is crated only to show the message-*/
+            if (action.type === 'NO_VALUE') {
+              /**here the state will be empty thats why is
+               * checked as 'NO_VALUE' action.type*/
+              return{ ...state, 
+                   isModalOpen:true,
+                   modalContent: 'please enter a value'}
+  }
+  throw new Error('no matching action type')
+};
+
 const defaultState = {
-  /**if i want to test the content i can pass
-   * a value for 'modalContent'
-   */
+  /**people is the default state of the array and 
+   * i gonna fill it in the reducer*/
   people: [],
   isModalOpen:false,
   modalContent: '',
@@ -53,13 +61,23 @@ const Index = () => {
    * the input*/
   const handleSubmit = (e) =>{
     e.preventDefault()
-    /**if 'name' exist */
+    
     if (name) {
-        /**this message will be propmted
-         * and is related to reducer function*/
-        dispatch({type:'Testing'})
+      /**here i create the item to be added */
+      const newItem = {
+        id: new Date().getTime().toString(),
+        name }
+        /**the action type will refer the action that i
+         * want to do -this case add item, im gonna build it
+         * 
+         * - action type + payload -*/
+
+        dispatch({type:'ADD_ITEM', payload: newItem})
+        setName('')
     }else{
-   
+      /**this is the 'NO_VALUE' action, i defined 
+       * in the reducer */
+      dispatch({ type: 'NO_VALUE'})
     }
   }
 
