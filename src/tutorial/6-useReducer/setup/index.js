@@ -3,10 +3,14 @@ import Modal from './Modal';
 import { data } from '../../../data';
 // reducer function
 
-/**Modal App version 3 - Features:
+/**Modal App version 4 - Features:
  * 
- *      ---->Building 'ADD_ITEM' and 'NO_VALUE' and adding
- *           them to the reducer 
+ *      ---->Building 'CLOSE_MODAL' 
+ *          feature 
+ * 
+ *  Note: still working on 'REMOVE_ITEM', i have to check it
+ *        and fix it
+ * 
  */
 
 /**this is the reducer for the states,
@@ -32,6 +36,17 @@ const reducer = (state, action) => {
               return{ ...state, 
                    isModalOpen:true,
                    modalContent: 'please enter a value'}
+  }
+  if (action.type = 'CLOSE_MODAL') {
+    return{ ...state, 
+      isModalOpen:false
+    }
+  }
+  if (action.type === 'REMOVE_ITEM') {
+    const newPeople = state.people.filter((person) => 
+      person.id !== action.payload
+    )
+    return { ...state, people: newPeople}
   }
   throw new Error('no matching action type')
 };
@@ -81,13 +96,17 @@ const Index = () => {
     }
   }
 
+  const closeModal = () => {
+    dispatch({ type: 'CLOSE_MODAL'})
+  }
+
   return (
   <>
     <h2>useReducer</h2>
     {/**if 'state.isModalOpen' and show Modal 
      * Component with modalContent prop drilled 
      * to the component*/}
-    {state.isModalOpen && <Modal modalContent={state.modalContent}/>}
+    {state.isModalOpen && <Modal closeModal={closeModal} modalContent={state.modalContent}/>}
     {/**Note: to test switch the values of 'defaultState'*/}
     <form onSubmit={handleSubmit} className='form'> 
       <div>
@@ -107,8 +126,12 @@ const Index = () => {
     {state.people.map((person) => {
       return(
         /**by 'id' show every 'name' */
-        <div key={person.id}>
+        <div key={person.id} className='item'>
           <h4>{person.name}</h4>
+          <button 
+            onClick={()=> dispatch(
+              { type: 'REMOVE_ITEM', payload: person.id})}
+            >remove</button>
         </div>
       )
     })}
