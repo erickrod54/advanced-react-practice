@@ -1,56 +1,21 @@
 import React, { useState, useReducer } from 'react';
 import Modal from './Modal';
 import { data } from '../../../data';
-// reducer function
+/**here i import the reducer and everything is still working */
+import { reducer } from './reducer';
 
-/**Modal App version 5 - Features:
+/**Modal App version 6 - Features:
  * 
- *      ---->Building 'CLOSE_MODAL' 
- *          feature 
- *     
- *     ---->Build 'REMOVE_ITEM' Feature
- *  
- *  Note: the issue with 'REMOVE_ITEM' on
- *  version 4 was the condition of 'CLOSE_MODAL'
- *  was asigning instead of comparing -the modal
- *  was blocking the remove feature-
+ *      ---->Moving reducer block code to 
+ *          reducer js.
  * 
  */
 
+
 /**this is the reducer for the states,
  * always has a 'state' and a 'action'*/
-
- const reducer = (state, action) => {
-
-  if (action.type === 'ADD_ITEM') {
-     const newPeople = [...state.people, action.payload]
-     return {...state, 
-              people: newPeople,
-              isModalOpen: true,  
-              modalContent: 'Item Added'};
-            }
-  if (action.type === 'NO_VALUE') {
-      return{ ...state, 
-           isModalOpen:true,
-           modalContent: 'please enter a value'}
-  }
-  /**this line was action.type = 'CLOSE_MODAL' instead of
-   * action.type === 'CLOSE_MODAL'*/
-  if (action.type === 'CLOSE_MODAL') {
-    return{ ...state, 
-      isModalOpen:false
-    }
-  }
-  if (action.type === 'REMOVE_ITEM') {
-    const newPeople = state.people.filter(
-        (person) =>  person.id !== action.payload
-    )
-    return { ...state, people: newPeople}
-  }
-  throw new Error('no matching action type')
-};
-
 const defaultState = {
+
   /**people is the default state of the array and 
    * i gonna fill it in the reducer*/
   people: [],
