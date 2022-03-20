@@ -1,8 +1,7 @@
 import React from 'react';
 /**
- * PropTypes app version 1 - 'Product' Component - Features:
- *          -->Destructuring 'image', 'name' and 'price' of 
- *             every single product
+ * PropTypes app version 2 - 'Product' Component - Features:
+ *          -->Testing 'image' and 'price' by console log it.
  * 
  * Note: PropTypes refers to fix issues that sometimes i can
  * find on API's
@@ -16,17 +15,18 @@ import React from 'react';
 
 /**here i destructure 'Product' props */
 const Product = ({image, name, price}) => {
+  /**then when y prompted i checkout undefined values */
+  
+  console.log(image,name,price)
   return (
   <>
-    <article className='product'>
-      {/**here i try to access the image but for the issue will
-       * throw an error*/}
+  {/**first i comment the block to get rid fo the error */}
+
+    {/* <article className='product'>
       <img src={image.url} alt={name}/>
       <h4>{name}</h4>
-      {/**here i access the price but doesn't exist for the
-       * last product */}
       <p>${price}</p>
-    </article>
+    </article> */}
   </>
   
   );
