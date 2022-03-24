@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /**
- * React-router app version 2 - index js - Features:
+ * fixing heading:
+ * 
+ * ----wrong title for:-------------------------------
+ * ---version e7bd87906d9f0b03ec701171d3a0765964b0d0c3
+ * 
+ * React-router app version 3 - Navbar js - Features:
  * 
  *              --> Importing and using 'Link' Component 
  *                  to create a use-experience navigation.
