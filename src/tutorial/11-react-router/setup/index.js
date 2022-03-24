@@ -10,12 +10,23 @@ import Person from './Person';
 // navbar
 import Navbar from './Navbar';
 /**
- * React-router app version 2 - index js - Features:
+ * React-router app version 3 - index js - Features:
  * 
- *              --> Placing 'NavBar' Component.
+ *              --> Building the Route for 'Person' 
+ *                  Component.
+ *              --> Setting 'children' Placeholder as 
+ *                  '<Person />'.
  * 
- * Note: Depending where i place the 'NavBar' will stick to
- * the routes and the navigation experience.
+ * Note: in the 'person' route the name after the ':' can 
+ * be any name that i want, and the path also i can do it
+ * as long or as short as i want -this characteristics named
+ * as a dynamic links-, example:
+ *      
+ *        '/person/:id' or '/:id' -this is a dynamic link-
+ * 
+ * both access the same information its only a name that i give
+ * to the path
+ * 
  */
 const ReactRouterSetup = () => {
   return(
@@ -29,13 +40,8 @@ const ReactRouterSetup = () => {
         <Route exact path='/'><Home /></Route>
         <Route path='/about'><About/></Route>
         <Route path='/people'><People/></Route>
-        <Route path='/person'><Person/></Route>
-
-        {/**the star '*' means all routes that match
-         * if i try to acces to a route that does not exist 
-         * for '/adson' will throw the Error Component
-        */}
-
+        {/**here i access to the specific person by id */}
+        <Route path='/person/:id' children={<Person />}></Route>
        <Route path='*'><Error/></Route>
     </Switch>
   </Router>  
