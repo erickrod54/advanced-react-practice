@@ -1,6 +1,6 @@
 import React from 'react';
 // react router
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // pages
 import Home from './Home';
 import About from './About';
@@ -10,23 +10,23 @@ import Person from './Person';
 // navbar
 import Navbar from './Navbar';
 /**
- * React-router app version 3 - index js - Features:
+ * React-router app version 4 - index js - Features:
  * 
- *              --> Building the Route for 'Person' 
- *                  Component.
- *              --> Setting 'children' Placeholder as 
- *                  '<Person />'.
+ *              --> Updating to react-router v6.2.2
  * 
- * Note: in the 'person' route the name after the ':' can 
- * be any name that i want, and the path also i can do it
- * as long or as short as i want -this characteristics named
- * as a dynamic links-, example:
- *      
- *        '/person/:id' or '/:id' -this is a dynamic link-
- * 
- * both access the same information its only a name that i give
- * to the path
- * 
+ * Note: Changes:
+ *          --> Switch doesn't exist.
+ *          --> 'Router' Component wrap the 'app'- this case
+ *               im do it to the Routes -.
+ *          --> 'Routes' Component wrap every 'Route'.
+ *          --> Every 'Route' has a 'element' props that can
+ *              be use to pass js code or 'React Components'.
+ *          --> The 'children placeholder' is replaced by the
+ *              'element' prop, i only have to name the 
+ *              'dynamic link'.
+ *          --> React components for navigation experience as
+ *              'Navbar' must be placed outside the Routes, but
+ *               wrapped by 'Router' Component.
  */
 const ReactRouterSetup = () => {
   return(
@@ -34,17 +34,18 @@ const ReactRouterSetup = () => {
   <Router>
     {/**Here i place the 'Navbar' so will stick to all the
      * Routes
-     */}
-    <Navbar />
-    <Switch>
-        <Route exact path='/'><Home /></Route>
-        <Route path='/about'><About/></Route>
-        <Route path='/people'><People/></Route>
+    */}
+      <Navbar />
+  <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/about' element={<About/>}></Route>
+        <Route path='/people' element={<People/>}></Route>
         {/**here i access to the specific person by id */}
-        <Route path='/person/:id' children={<Person />}></Route>
-       <Route path='*'><Error/></Route>
-    </Switch>
-  </Router>  
+        <Route path='/person/:id' element={<Person />}>
+        </Route>
+       <Route path='*' element={<Error/>}></Route>
+  </Routes> 
+  </Router> 
   </>
   )
 };
