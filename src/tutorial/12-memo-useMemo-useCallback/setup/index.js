@@ -2,32 +2,30 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { useFetch } from '../../9-custom-hooks/final/2-useFetch'
 
 /**
- * React.memo and useCallback app version 1 - index js - Features:
+ * React.memo and useCallback app version 2 - index js - Features:
  * 
- *                  --> Setting 'useEffect' to prompt and count
- *                      the times that is called a render for
- *                      'BigList' and 'SingleProduct' component
- *            
- *                  -->  Using 'React.memo' to caching the 
- *                       render
+ *                  --> Building an 'AddToCart' functionality
+ *                      and passing it top-down as a prop to 
+ *                     'SingleProduct'
  * 
- * Note:This app is directly pointing 'Performance Optimization'
- * that some apps need(react is fast as default, so to optimize
- * i have to analyze why i have to ), but 'Performance 
- * Optimization' add their own costs:
- *            --> Memory
- *            --> Computation power
+ *                  --> Implementing 'useCallback' hook to
+ *                      fix the re-render triggered by 
+ *                      'AddToCart'
  * 
- * Memoizing - caching results (remember)
- * -this is a computer science term-
+ * Note: Memoizing renders can be split in two:  
  * 
- * in this version i use 'console.count' is a method that 
- * counts how many times something got prompted
+ * -----(like was for 'product and count')-----
+ *      for --> states --> 'React.memo'
  * 
- * Solving 'useState' behavior of re-render using 'React.memo'
- * both components several times; So:  
- 
- // every time props or state changes, component re-renders
+ * -----(like it is for 'AddToCart' prop)-----
+ *      for --> props --> 'useCallback'
+ * 
+ * every time props or state changes, component re-renders
+ * remenber props can be a value or functionality
+ * 
+ * In this version 'AddToCart' increases 'cart' state so
+ * will trigger a re-render (this time with an action
+ * -'AddToCart' by  'cart' state changes-)  
  */
 
 // ATTENTION!!!!!!!!!!
@@ -35,48 +33,66 @@ import { useFetch } from '../../9-custom-hooks/final/2-useFetch'
 const url = 'https://course-api.com/javascript-store-products'
 
 const Index = () => {
-  const { products } = useFetch(url)
-  /**how i build the useState, is result the issue of the called */
-  /**Every time the counter increase 'useState' preserves the 
-   * value and triggers the re render*/
-  const [count, setCount] = useState(0)
+  const { products } = useFetch(url);
+  const [count, setCount] = useState(0);
+  /**here i build a state for 'cart' */
+  const [cart, setCart] = useState(0);
 
+  /**---to use 'useCallback' hook i wrap the functionality
+   *---and in this case i set 'cart' as a dependency cause
+   *---it is what is triggering re-render for 'BigList'
+   */
+
+  /**First - i build the 'AddToCart' fuctionality*/
+  const AddToCart = useCallback(() => {
+    setCart(cart + 1)
+    /**here i set cart as dependency so when cart state
+     * changes only, then will create this functionality*/
+  }, [cart])
+
+  /**--next steps will be pass top-down the 'AddToCart' prop--*/
+  /**----------to get 'SingleProduct' Component------------- */
   return (
     <>
       <h1>Count : {count}</h1>
       <button className='btn' onClick={() => setCount(count + 1)}>
         click me
       </button>
-      <BigList products={products} />
+      {/**here i render the counter */}
+      <h1 style={{marginTop: '3rem'}}>
+        Cart: {cart}
+      </h1>
+      {/**Second - i pass 'AddToCart' prop throught 'BigList'*/}
+      <BigList products={products} AddToCart={AddToCart}/>
     </>
   )
 }
-/**Here i wrap the component using 'React.memo' */
-/**this solves the issue of 'useState' re rendering the
- * Components */
-const BigList = React.memo(({ products }) => {
+
+/**Third - i destructure 'AddToCart' to pass throught
+ * 'BigList' Component
+*/
+const BigList = React.memo(({ products, AddToCart }) => {
   useEffect(() => {
-    /**Just rendering the app will be called 2 times */
-    /**if click the counter, will be called the double times */
-    /**-----this is happening because how is 'useState' using his 
-     * value--------------------- */
     console.log('big list called')
   })
   return (
     <section className='products'>
       {products.map((product) => {
-        return <SingleProduct key={product.id} {...product}></SingleProduct>
+        return <SingleProduct 
+                  key={product.id} {...product}
+/**Fourth - i pass 'AddToCart' prop throught 'SingleProduct'*/
+                  AddToCart={AddToCart}
+                  ></SingleProduct>
       })}
     </section>
   )
 })
 
-const SingleProduct = ({ fields }) => {
+/**Fifth - i destructure 'AddToCart' to pass throught
+ * 'SingleProduct' Component
+*/
+const SingleProduct = ({ fields, AddToCart }) => {
   useEffect(() => {
-    /**Just rendering the app will be called 24 times */
-    /**if click the counter, will be called the double times */
-    /**-----this is happening because how is 'useState' using his 
-     * value--------------------- */
     console.count('single item called')
   })
   let { name, price } = fields
@@ -88,6 +104,9 @@ const SingleProduct = ({ fields }) => {
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <p>${price}</p>
+{/**Sixth - being destructured 'AddToCart' i build the
+ * 'button' to simulate adding to the cart */}      
+      <button onClick={AddToCart}>add to cart</button>
     </article>
   )
 }
