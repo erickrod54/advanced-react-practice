@@ -25,7 +25,9 @@ import Error from "./pages/error-component";
  * 
  * this is extremily usefull to create a shared layout and to 
  * created nested navigations (most appreciated in Dashboards
- * or protected Routes as well as navBars Components ) 
+ * or protected Routes as well as navBars Components )
+ * 
+ * --Pending work on dashboard, nav, and footer 
  */
 
 const Index = () => {
