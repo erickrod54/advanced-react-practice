@@ -1,35 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-import { Btn } from "../components/index.styles";
+//import { Btn } from "../components/index.styles";
 
-/**React-routerv6 Products app version 1- 'Home' Component - 
+/**React-routerv6 Products app version 2 - 'Home' Component - 
  * Features:
  * 
- *              -->Implementing 'Link' Component to navigate
- *                 to 'About'
- *              -->Importing and placing 'Btn' Style Component
- *                 to wrap the 'Link'
+ *              -->Setting up the Parent Route (Shared Layout)
+ *                 using 'Outlet' Component
  * 
- * Notes: For intern navigation on the Website the best approach 
- * is use 'Link', and for external still use 'a' tags with 'href'
- * 
- * i created a div in order to applied styles defined on 
- * index.styles.js
+ * Notes: Wrapping the 'Route' or 'Route' group is the first step,
+ * then to finish set up the 'Shared Layout' i set the 'Outlet' 
+ * Component on the Parent Route -for this case 'Home' -
  */
 
 const Home = () => {
 
     return(
         <>
+        <section className="section">
             <h2>Home Component</h2>
-            <Btn>
-              <div>
-                  <Link 
-                    to='/about' 
-                    className="btn">About</Link>
-              </div>
-            </Btn>
+            
+              <h2>Home - Shared layout</h2>
+            <Outlet />
+        </section>
         </>
     )
 }
