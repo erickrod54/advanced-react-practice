@@ -3,31 +3,25 @@ import {
         BrowserRouter as Router, 
         Routes, 
         Route } from 'react-router-dom';
-import Home from "./pages/home-component";
+import Home from './pages/home-component';
 import About from "./pages/about-component";
 import Products from "./pages/products-component";
 import Error from "./pages/error-component";
+import SharedLayout from "./pages/shared-layout.component";
 
-/**React-routerv6 Products app version 2 - index js - Features:
+/**React-routerv6 Products app version 3 - index js - Features:
  * 
- *              --> Implementing Nested Routes applying it on
- *                 'Home' Component.
- *              
- *              -->Implementing a Second Parent 'Route' called
- *                 'DashBoard'
+ *              --> Implementing 'SharedLayout' Component. 
+ *              --> Setting 'Home' Component Route as a child,
+ *                  and as a 'index'.
  * 
- * Notes: A 'Route' component that wrap another 'Route' or group 
- * of it makes it a father and the 'Route' or the group will be
- * their children
+ * Notes: 'SharedLayout' will carry with a 'NavBar' -this two 
+ * first will stick on the navigation- and an 'Outlet' -will
+ * display the current child-.
  * 
- * ----this case-- 'Home' Route will become in father of the 
- * ----rest of the Routes
+ * 'index' prop in a route displays that route as default.
  * 
- * this is extremily usefull to create a shared layout and to 
- * created nested navigations (most appreciated in Dashboards
- * or protected Routes as well as navBars Components )
- * 
- * --Pending work on dashboard, nav, and footer 
+ * --Pending work on dashboard, and footer
  */
 
 const Index = () => {
@@ -36,35 +30,24 @@ const Index = () => {
         <>
             <h2>React Router V6 practice</h2>
             <Router>
-                {/**here i'll set a navBar Component, now is as
-                 * a test for 'Shared Layout' outside the 'Routes'
-                */}
-                <nav>our navbar</nav>
                 <Routes>
-                    
-                    {/** 'Home' Component will wrap and become
-                     * parent of the rest of the routes 
-                     * -'Shared Layout' internal to Routes-*/}
 
-                    <Route path='/' element={<Home />}>
+                    <Route path='/' element={<SharedLayout />}>
+                       <Route index path='/home' element={<Home />}/>
                        <Route path='/about' element={<About />}/>
                        <Route path='/products' element={<Products />}/>
                        <Route path='*' element={<Error />}/>
                     </Route>
-                    {/**Can cohexist multiple parent Routes
-                     * as is the case of '/dashboard'
-                     */}
+                  
                     <Route 
                        path='/dashboard' 
                        element={<div>dashboard</div>}>
                         <Route 
                             path='/dashboard/stats' 
                             element={<div>stats</div>}></Route>
-                     </Route>
+                    </Route>
                </Routes>
-               {/**'Shared Layout' external to Routes 
-                * example for footer */}
-               <footer>our footer</footer>
+               
             </Router>
         </>
     )
