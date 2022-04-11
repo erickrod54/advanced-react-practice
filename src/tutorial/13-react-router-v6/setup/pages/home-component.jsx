@@ -1,31 +1,26 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-//import { Btn } from "../components/index.styles";
-
-/**React-routerv6 Products app version 2 - 'Home' Component - 
- * Features:
+/**React-routerv6 Products app version 3 - index js - Features:
  * 
- *              -->Setting up the Parent Route (Shared Layout)
- *                 using 'Outlet' Component
+ *              --> Relocating 'Home' Component
  * 
- * Notes: Wrapping the 'Route' or 'Route' group is the first step,
- * then to finish set up the 'Shared Layout' i set the 'Outlet' 
- * Component on the Parent Route -for this case 'Home' -
+ * Notes: this code was relocated to his won file
  */
 
 const Home = () => {
 
     return(
         <>
-        <section className="section">
             <h2>Home Component</h2>
-            
-              <h2>Home - Shared layout</h2>
-            <Outlet />
-        </section>
+            <p>Hit to go to About page</p>
+            <Link 
+                to='/about'
+                className="btn"
+                >Go to About</Link>
         </>
     )
 }
+
 
 export default Home;
