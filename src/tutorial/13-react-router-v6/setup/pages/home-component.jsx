@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Btn } from "../components/index.styles";
 
-/**React-routerv6 Products app version 3 - index js - Features:
+/**React-routerv6 Products app version 4 - 'Home' Component- 
+ * Features:
  * 
- *              --> Relocating 'Home' Component
+ *              --> Implementing 'Btn' Style Component.
  * 
- * Notes: this code was relocated to his won file
+ * Notes: this Component was applied here and in 'About' 
+ * Component. 
  */
 
 const Home = () => {
@@ -14,10 +17,12 @@ const Home = () => {
         <>
             <h2>Home Component</h2>
             <p>Hit to go to About page</p>
+        <Btn>
             <Link 
-                to='/about'
                 className="btn"
+                to='/about'
                 >Go to About</Link>
+        </Btn>       
         </>
     )
 }
