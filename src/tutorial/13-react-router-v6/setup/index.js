@@ -8,20 +8,16 @@ import About from "./pages/about-component";
 import Products from "./pages/products-component";
 import Error from "./pages/error-component";
 import SharedLayout from "./pages/shared-layout.component";
+import SingleProduct from "./pages/single-product-component";
 
-/**React-routerv6 Products app version 3 - index js - Features:
+/**React-routerv6 Products app version 6 - index js - Features:
  * 
- *              --> Implementing 'SharedLayout' Component. 
- *              --> Setting 'Home' Component Route as a child,
- *                  and as a 'index'.
+ *              --> Importing and Placing 'SingleProduct'.
+ *  
+ *              --> Building a 'URL Params' in 'Products' Route
+ *                  to take to every 'SingleProduct'.
  * 
- * Notes: 'SharedLayout' will carry with a 'NavBar' -this two 
- * first will stick on the navigation- and an 'Outlet' -will
- * display the current child-.
- * 
- * 'index' prop in a route displays that route as default.
- * 
- * --Pending work on dashboard, and footer
+ * Notes: 
  */
 
 const Index = () => {
@@ -36,6 +32,12 @@ const Index = () => {
                        <Route index path='/home' element={<Home />}/>
                        <Route path='/about' element={<About />}/>
                        <Route path='/products' element={<Products />}/>
+                       
+                       {/**Here i build 'URL Params' for every single
+                        * product*/}
+                       <Route 
+                            path='/products/:productId' 
+                            element={<SingleProduct />}/>
                        <Route path='*' element={<Error />}/>
                     </Route>
                   
