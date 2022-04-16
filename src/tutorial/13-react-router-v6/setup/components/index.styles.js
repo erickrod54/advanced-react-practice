@@ -1,22 +1,13 @@
 import styled from 'styled-components';
 
-/**React-routerv6 Products app version 4 - 'index.styles.js' 
+/**React-routerv6 Products app version 6 - 'index.styles.js' 
  * Component - Features:
  * 
- *              --> Building 'NavLinks' Style Component.
+ *              --> Building 'ProductWrapper' Component to set 
+ *                  Styles for 'SingleProduct'.
  * 
- *              --> Building 'Container' Style Component.
- * 
- * Notes: as the original style is set as style classes, i have 
- * to keep them the same, and the goal is to set an element 
- * this case a JSX 'div' element to applied successfully the 
- * styles the Link 
- * 
- * The colors are bring by targeting the ':root' element on 
- * the Global css sheet, and defining each variable 'name' and 
- * 'color' value  
- * 
- * (reference index.css) 
+ * Notes: 'ProductWrapper' has styles for JSX 'div' as well as
+ * the JSX 'img' element
  */
 
 export const Btn = styled.div`
@@ -59,7 +50,21 @@ export const NavLinks = styled.div`
 `
 
 export const Container = styled.div`
-  width: 50vw;
+  width: 30vw;
   margin: 0 auto;
   max-width: var(--max-width);
+`
+
+export const ProductWrapper = styled.div`
+  width: 90vw;
+    max-width: 300px;
+    background: var(--cardBackGround);
+    border-radius: 0.25rem ;
+    
+    img {
+        width: 100%;
+        border-top-left-radius: 5rem;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 5rem;
+    } 
 `
