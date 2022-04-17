@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
         BrowserRouter as Router, 
         Routes, 
@@ -9,18 +9,25 @@ import Products from "./pages/products-component";
 import Error from "./pages/error-component";
 import SharedLayout from "./pages/shared-layout.component";
 import SingleProduct from "./pages/single-product-component";
+import DashBoard from "./pages/dashboard-component";
+import Login from "./pages/login.component";
 
-/**React-routerv6 Products app version 6 - index js - Features:
+/**React-routerv6 Products app version 7 - index js - Features:
  * 
- *              --> Importing and Placing 'SingleProduct'.
- *  
- *              --> Building a 'URL Params' in 'Products' Route
- *                  to take to every 'SingleProduct'.
+ *              --> Building States for Authentication 'user', 'setUser'.
+ *              
+ *              --> Building 'Login' Route passing a 'setUser' prop.
  * 
- * Notes: 
+ *              --> Building 'Dashboard' Route passing a 'user' prop. 
+ * 
+ * Notes: 'setUser' will be passed as props to 'Login' to build 
+ * authentication process and 'user' will be passed as props to 'DashBoard'
+ * to build the after authentication process.
  */
 
 const Index = () => {
+
+    const [ user, setUser] = useState(null);
 
     return(
         <>
@@ -32,21 +39,22 @@ const Index = () => {
                        <Route index path='/home' element={<Home />}/>
                        <Route path='/about' element={<About />}/>
                        <Route path='/products' element={<Products />}/>
-                       
+
                        {/**Here i build 'URL Params' for every single
                         * product*/}
                        <Route 
                             path='/products/:productId' 
                             element={<SingleProduct />}/>
-                       <Route path='*' element={<Error />}/>
-                    </Route>
-                  
-                    <Route 
-                       path='/dashboard' 
-                       element={<div>dashboard</div>}>
+
+                        {/**'setUser' for 'Login'*/}
                         <Route 
-                            path='/dashboard/stats' 
-                            element={<div>stats</div>}></Route>
+                            path='/login' 
+                            element={<Login setUser={setUser}/>}/>
+                        {/**'user' for 'Dashboard'*/}                                                            
+                        <Route 
+                            path='/dashboard' 
+                            element={<DashBoard user={user}/>}/>    
+                       <Route path='*' element={<Error />}/>
                     </Route>
                </Routes>
                
