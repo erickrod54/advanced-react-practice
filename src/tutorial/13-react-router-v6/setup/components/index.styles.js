@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-/**React-routerv6 Products app version 6 - 'index.styles.js' 
+/**React-routerv6 Products app version 7 - 'index.styles.js' 
  * Component - Features:
  * 
- *              --> Building 'ProductWrapper' Component to set 
- *                  Styles for 'SingleProduct'.
+ *              --> Modifying NavLinks > grid-template-columns to
+ *                  add '/login' 'NavLink' in the same row.
  * 
  * Notes: 'ProductWrapper' has styles for JSX 'div' as well as
  * the JSX 'img' element
@@ -44,20 +44,21 @@ export const ErrorWrapper = styled.article`
 export const NavLinks = styled.div`
   max-width: var(--fixed-width);
   margin: 0 auto;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 `
 
 export const Container = styled.div`
   width: 30vw;
   margin: 0 auto;
+  margin-left: 10rem;
   max-width: var(--max-width);
 `
 
 export const ProductWrapper = styled.div`
   width: 90vw;
-    max-width: 300px;
+    max-width: 400px;
     background: var(--cardBackGround);
     border-radius: 0.25rem ;
     
