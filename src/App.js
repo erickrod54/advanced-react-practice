@@ -1,12 +1,13 @@
 import React from 'react';
-import Setup from './tutorial/13-react-router-v6/setup/';
-import GlobalStyles from './global.styles';
+import Setup from './tutorial/14-axios-react-practice/setup/axios-app';
+import AxiosGlobalStyle from './global.styles.axios.practice';
 
-/**React-routerv6 Products app version 4 - 'App.js' file - 
- * Features:
+/**Axios app version 1 - 'App.js' file - Features:
  * 
- *              -->Importing and Placing 'GlobalStyles'
- *                 Component.
+ *              -->Importing and Placing 'App' from axios app.
+ * 
+ *              -->Importing and Placing 'AxiosGlobalStyle' to 
+ *                 set Styles as Global. 
  * 
  * Notes: 'GlobalStyles' Component set Global Styles instead
  * of using 'index.css' style sheet. This way i'll be able to
@@ -18,13 +19,10 @@ function App() {
   return (
     <>
     <h2>Advanced React Concepts</h2>
-    <div className='container'>
-      <GlobalStyles/>
+      <AxiosGlobalStyle />      
       <Setup />
-   
-    </div>
-    </>
     
+    </>
   )
 }
 export default App
