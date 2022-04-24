@@ -1,8 +1,9 @@
 import Title from './components/Title';
+import Setup from './examples/1-first-request'
 
-/**AxiosApp app version 1 - 'axios-app' file - Features:
+/**AxiosApp app version 2 - 'axios-app' file - Features:
  * 
- *              --> Building 'AxiosApp' Component.
+ *              --> Setting up 'first-request'.
  * 
  * Notes: Axios is a library that manages the 
  * fetching data from ... and sending data to... 
@@ -24,6 +25,7 @@ const AxiosApp = ()  => {
   return (
     <main>
       <Title />
+      <Setup />
     </main>
   );
 }
