@@ -1,9 +1,9 @@
 import Title from './components/Title';
-import Setup from './examples/2-headers'
+import Setup from './examples/3-post-request'
 
-/**AxiosApp app version 2 - 'axios-app' file - Features:
+/**AxiosApp app version 3 - 'axios-app' file - Features:
  * 
- *              --> Setting up 'headers'.
+ *              --> Setting up '3-post-request'.
  * 
  * Notes: Axios is a library that manages the 
  * fetching data from ... and sending data to... 
