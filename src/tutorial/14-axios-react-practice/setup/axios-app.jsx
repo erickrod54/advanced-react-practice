@@ -1,9 +1,9 @@
 import Title from './components/Title';
-import Setup from './examples/1-first-request'
+import Setup from './examples/2-headers'
 
 /**AxiosApp app version 2 - 'axios-app' file - Features:
  * 
- *              --> Setting up 'first-request'.
+ *              --> Setting up 'headers'.
  * 
  * Notes: Axios is a library that manages the 
  * fetching data from ... and sending data to... 
