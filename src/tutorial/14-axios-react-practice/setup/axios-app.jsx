@@ -1,14 +1,14 @@
 import Title from './components/Title';
-import Setup from './examples/4-global-instance';
+import Setup from './examples/5-custom-instance';
 /**in this case i'm importing the instance created
  * different to say that comes form 'axios' library
  */
 import './axios/global';
 
-/**AxiosApp app version 4 - 'axios-app' file - Features:
+/**AxiosApp app version 5 - 'axios-app' file - Features:
  * 
- *              --> Setting up 'global' js file in order
- *                  to set defualt global axios request.
+ *              --> Setting up 'custom-instance' using
+ *                  axios.
  * 
  * Notes: Axios is a library that manages the 
  * fetching data from ... and sending data to... 
