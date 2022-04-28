@@ -1,13 +1,13 @@
 import Title from './components/Title';
-import Setup from './examples/5-custom-instance';
+import Setup from './examples/6-interceptors';
 /**in this case i'm importing the instance created
  * different to say that comes form 'axios' library
  */
 import './axios/global';
 
-/**AxiosApp app version 5 - 'axios-app' file - Features:
+/**AxiosApp app version 6 - 'axios-app' file - Features:
  * 
- *              --> Setting up 'custom-instance' using
+ *              --> Setting up 'interceptors' using
  *                  axios.
  * 
  * Notes: Axios is a library that manages the 
